@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.taotao.mapper.ServiceprocalMapper" >
+  <resultMap id="BaseResultMap" type="com.taotao.pojo.Serviceprocal" >
+    <result column="SERVICEID" property="serviceid" jdbcType="VARCHAR" />
+    <result column="SERVICENAME" property="servicename" jdbcType="VARCHAR" />
+    <result column="TIMEDATE" property="timedate" jdbcType="TIMESTAMP" />
+    <result column="CONSUMTIME" property="consumtime" jdbcType="DECIMAL" />
+    <result column="BIZTRACKNO" property="biztrackno" jdbcType="VARCHAR" />
+    <result column="IP" property="ip" jdbcType="VARCHAR" />
+    <result column="TRANSDATE" property="transdate" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    SERVICEID, SERVICENAME, TIMEDATE, CONSUMTIME, BIZTRACKNO, IP, TRANSDATE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.taotao.pojo.ServiceprocalExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SERVICEPROCAL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.taotao.pojo.ServiceprocalExample" >
+    delete from SERVICEPROCAL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.taotao.pojo.Serviceprocal" >
+    insert into SERVICEPROCAL (SERVICEID, SERVICENAME, TIMEDATE, 
+      CONSUMTIME, BIZTRACKNO, IP, 
+      TRANSDATE)
+    values (#{serviceid,jdbcType=VARCHAR}, #{servicename,jdbcType=VARCHAR}, #{timedate,jdbcType=TIMESTAMP}, 
+      #{consumtime,jdbcType=DECIMAL}, #{biztrackno,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, 
+      #{transdate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.taotao.pojo.Serviceprocal" >
+    insert into SERVICEPROCAL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="serviceid != null" >
+        SERVICEID,
+      </if>
+      <if test="servicename != null" >
+        SERVICENAME,
+      </if>
+      <if test="timedate != null" >
+        TIMEDATE,
+      </if>
+      <if test="consumtime != null" >
+        CONSUMTIME,
+      </if>
+      <if test="biztrackno != null" >
+        BIZTRACKNO,
+      </if>
+      <if test="ip != null" >
+        IP,
+      </if>
+      <if test="transdate != null" >
+        TRANSDATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="serviceid != null" >
+        #{serviceid,jdbcType=VARCHAR},
+      </if>
+      <if test="servicename != null" >
+        #{servicename,jdbcType=VARCHAR},
+      </if>
+      <if test="timedate != null" >
+        #{timedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="consumtime != null" >
+        #{consumtime,jdbcType=DECIMAL},
+      </if>
+      <if test="biztrackno != null" >
+        #{biztrackno,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="transdate != null" >
+        #{transdate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.taotao.pojo.ServiceprocalExample" resultType="java.lang.Integer" >
+    select count(*) from SERVICEPROCAL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SERVICEPROCAL
+    <set >
+      <if test="record.serviceid != null" >
+        SERVICEID = #{record.serviceid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.servicename != null" >
+        SERVICENAME = #{record.servicename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.timedate != null" >
+        TIMEDATE = #{record.timedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.consumtime != null" >
+        CONSUMTIME = #{record.consumtime,jdbcType=DECIMAL},
+      </if>
+      <if test="record.biztrackno != null" >
+        BIZTRACKNO = #{record.biztrackno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ip != null" >
+        IP = #{record.ip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transdate != null" >
+        TRANSDATE = #{record.transdate,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SERVICEPROCAL
+    set SERVICEID = #{record.serviceid,jdbcType=VARCHAR},
+      SERVICENAME = #{record.servicename,jdbcType=VARCHAR},
+      TIMEDATE = #{record.timedate,jdbcType=TIMESTAMP},
+      CONSUMTIME = #{record.consumtime,jdbcType=DECIMAL},
+      BIZTRACKNO = #{record.biztrackno,jdbcType=VARCHAR},
+      IP = #{record.ip,jdbcType=VARCHAR},
+      TRANSDATE = #{record.transdate,jdbcType=DATE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
